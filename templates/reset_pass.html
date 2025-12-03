@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Reset Password — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <div class="panel">
+
+      <h2 class="title">Set New Password</h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <form class="form" method="POST" action="/reset-password/{{ token }}" autocomplete="off">
+
+        <div class="input">
+          <label>New Password</label>
+          <input type="password" name="password" placeholder="Enter new password" autocomplete="new-password">
+        </div>
+
+        <button class="btn" type="submit">Update Password</button>
+
+        <button class="btn ghost generate" type="submit" name="auto_password" value="yes">
+          Auto Generate Password
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

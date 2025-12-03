@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Dashboard — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- LEFT SIDE IMAGE PANEL -->
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <!-- RIGHT SIDE DASHBOARD PANEL -->
+    <div class="panel">
+
+      <div class="brand">
+        <div class="logo" style="width:56px;height:56px;font-size:20px">CP</div>
+        <h1>CyberAuth</h1>
+      </div>
+
+      <h2 class="title">Dashboard</h2>
+      <p class="lead">You are securely logged in.</p>
+
+      <div class="dashboard-card">
+        <h3 style="margin-bottom:8px;color:#f7d708">Account Overview</h3>
+
+        <!-- Safe, non-personal display -->
+        <p style="color:#ddd">Name: <strong>XYZ User</strong></p>
+        <p style="color:#ddd">Aadhar: <strong>1234 XXXX 5678</strong></p>
+        <p style="color:#ddd">Phone: <strong>9876 XXXX 00</strong></p>
+
+        <!-- Emoji reward -->
+        <p style="color:#ddd">Your Reward Emoji:
+          <span style="font-size:22px">{{ emoji }}</span>
+        </p>
+
+        <p style="color:#ddd;margin-top:10px">Status: Logged in successfully.</p>
+      </div>
+       <!-- play button for snake game -->
+        <a href="{{ url_for('snake_game') }}?username={{ username }}" class="btn">Play Nokia Snake</a>
+      <a href="/" class="btn">Logout</a>
+
+    </div>
+  </div>
+
+</body>
+</html>

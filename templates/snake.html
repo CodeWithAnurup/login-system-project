@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Nokia Snake — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/static/snake.css" />
+</head>
+<body>
+
+  <div class="page snake-page">
+
+    <!-- LEFT SIDE CONTROL PANEL -->
+    <div class="snake-panel">
+
+      <div class="brand">
+        <div class="logo">CP</div>
+        <h1>CyberAuth</h1>
+      </div>
+
+      <h2 class="title">Nokia Snake</h2>
+      <p class="lead">Retro play — eat, grow, survive.</p>
+
+      <!-- GAME CONTROLS -->
+      <div class="snake-controls">
+
+        <label for="speedRange">Speed (1 slow → 20 fast):</label>
+        <input id="speedRange" type="range" min="1" max="20" value="8" />
+        <div class="speed-value">8</div>
+
+        <label for="cellSize">Grid size (cells across):</label>
+        <input id="cellSize" type="range" min="10" max="30" value="20" />
+        <div class="cell-value">20</div>
+
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn" id="startBtn">Start</button>
+          <button class="btn ghost" id="pauseBtn">Pause</button>
+          <button class="btn ghost" id="restartBtn">Restart</button>
+        </div>
+
+        <!-- SOUND CONTROLS -->
+        <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+          <button id="soundToggle" class="btn ghost">🔊 Sound</button>
+          <label style="color:#aaa;font-size:13px;">Volume</label>
+          <input id="volRange" type="range" min="0" max="1" step="0.05"
+                 value="0.8" style="width:120px"/>
+        </div>
+
+        <div style="margin-top:12px;color:#ccc;font-size:13px">
+          Player: <strong style="color:#f7d708">{{ username }}</strong>
+        </div>
+
+      </div>
+
+      <div style="margin-top:14px;">
+        <a href="/login" class="btn ghost">Back to Login</a>
+        <a href="/" class="btn ghost">Logout</a>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE CANVAS AREA -->
+    <div class="snake-hero">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- TOUCH CONTROLS FOR MOBILE -->
+      <div class="touch-controls" id="touchControls">
+        <button class="touch up" data-dir="up">▲</button>
+        <div style="display:flex;gap:8px">
+          <button class="touch left" data-dir="left">◀</button>
+          <button class="touch down" data-dir="down">▼</button>
+          <button class="touch right" data-dir="right">▶</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GAME OVER POPUP -->
+  <div id="gameOverModal" class="modal hidden">
+    <div class="modal-inner">
+      <h3>Game Over</h3>
+      <p id="finalScore">Score: 0</p>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button class="btn" id="modalRestart">Play Again</button>
+        <button class="btn ghost" id="modalClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/snake.js"></script>
+</body>
+</html>

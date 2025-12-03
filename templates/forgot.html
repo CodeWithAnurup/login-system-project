@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Forgot Password — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <div class="panel">
+
+      <div class="brand">
+        <div class="logo">CP</div>
+        <h1>CyberAuth</h1>
+      </div>
+
+      <h2 class="title">Reset Password</h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <form class="form" method="POST" action="/forgot" autocomplete="off">
+
+        <div class="input">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@gmail.com" autocomplete="off" required>
+        </div>
+
+        <button class="btn" type="submit">Send OTP</button>
+
+        <a class="small-link" href="/login">Back to Login</a>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+</html>

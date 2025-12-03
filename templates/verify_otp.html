@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Verify OTP — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <div class="panel">
+
+      <h2 class="title">Enter OTP</h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <form class="form" method="POST" action="/verify-otp" autocomplete="off">
+
+        <input type="hidden" name="email" value="{{ email }}">
+
+        <div class="input">
+          <label>OTP</label>
+          <input type="text" name="otp" placeholder="6-digit code" autocomplete="off" required>
+        </div>
+
+        <button class="btn" type="submit">Verify OTP</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

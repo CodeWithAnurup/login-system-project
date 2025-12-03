@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Signup — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <div class="panel">
+
+      <div class="brand">
+        <div class="logo">CP</div>
+        <h1>CyberAuth</h1>
+      </div>
+
+      <h2 class="title">Create Account</h2>
+      <p class="lead">Sign up to secure access — quick, encrypted, cool.</p>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <form class="form" method="POST" action="/signup" autocomplete="off">
+
+        <div class="input">
+          <label>Full Name (First + Last)</label>
+          <input type="text" name="name" placeholder="XYZ ABC" autocomplete="off" required>
+        </div>
+
+        <div class="input">
+          <label>Aadhar Number</label>
+          <input type="text" name="aadhar" maxlength="12" placeholder="1234XXXX5678" autocomplete="off" required>
+        </div>
+
+        <div class="input">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" maxlength="10" placeholder="9876XXXX00" autocomplete="off" required>
+        </div>
+
+        <div class="input">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@gmail.com" autocomplete="off" required>
+        </div>
+
+        <div class="input">
+          <label>Password (or auto-generate)</label>
+          <input type="password" name="password" placeholder="Enter password" autocomplete="new-password">
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <button class="btn" type="submit">Signup</button>
+
+          <button class="btn ghost generate" type="submit" name="auto_password" value="yes">
+            Auto Generate Password
+          </button>
+        </div>
+
+        <div class="form-foot">
+          <a href="/login">Already have an account? Login</a>
+          <a class="small-link" href="/forgot">Forgot Password?</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

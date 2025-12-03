@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login — CyberAuth</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="hero">
+      <img class="art" src="/static/pexels-mikhail-nilov-8107817.jpg" alt="cyber art">
+    </div>
+
+    <div class="panel">
+
+      <div class="brand">
+        <div class="logo">CP</div>
+        <h1>CyberAuth</h1>
+      </div>
+
+      <h2 class="title">Login</h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <form class="form" method="POST" action="/login" autocomplete="off">
+
+        <div class="input">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="XYZ ABC" autocomplete="off" required>
+        </div>
+
+        <div class="input">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password" autocomplete="new-password" required>
+        </div>
+
+        <button class="btn" type="submit">Login</button>
+
+        <div class="form-foot">
+          <a href="/">Create Account</a>
+          <a href="/forgot">Forgot Password?</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
