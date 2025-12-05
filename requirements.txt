@@ -1,6 +1,6 @@
 Flask==3.1.2
 Flask-Mail==0.10.0
 mysql-connector-python==9.5.0
-python-dotenv==1.0.1
 passlib==1.7.4
+python-dotenv==1.0.1
 gunicorn==22.0.0
