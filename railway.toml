@@ -1,5 +1,5 @@
 [build]
-builder = "heroku/buildpacks:20"
+builder = "paketobuildpacks/builder:base"
 
 [deploy]
-start = "gunicorn app:app"
+startCommand = "gunicorn app:app"
