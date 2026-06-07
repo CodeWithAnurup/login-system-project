@@ -202,7 +202,7 @@ def dashboard():
         return redirect('/login')
 
     user = get_user_by_name(session['username'])
-    return render_template("dashboard.html", username=user['name'], emoji=user['emoji'])
+    return render_template("dashboard.html", username=user['name'], phone=user['phone'], emoji=user['emoji'])
 
 
 # -------- LOGOUT --------

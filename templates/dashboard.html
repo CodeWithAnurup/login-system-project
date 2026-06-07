@@ -30,9 +30,8 @@
         <h3 style="margin-bottom:8px;color:#f7d708">Account Overview</h3>
 
         <!-- Safe, non-personal display -->
-        <p style="color:#ddd">Name: <strong>XYZ User</strong></p>
-        <p style="color:#ddd">Aadhar: <strong>1234 XXXX 5678</strong></p>
-        <p style="color:#ddd">Phone: <strong>9876 XXXX 00</strong></p>
+        <p style="color:#ddd">Name: <strong>{{ username }}</strong></p>
+        <p style="color:#ddd">Phone: <strong>{{ phone }}</strong></p>
 
         <!-- Emoji reward -->
         <p style="color:#ddd">Your Reward Emoji:
@@ -43,7 +42,7 @@
       </div>
        <!-- play button for snake game -->
         <a href="{{ url_for('snake_game') }}?username={{ username }}" class="btn">Play Nokia Snake</a>
-      <a href="/" class="btn">Logout</a>
+      <a href="/logout" class="btn">Logout</a>
 
     </div>
   </div>
