@@ -118,3 +118,20 @@ http://127.0.0.1:5000
 2. **Password Cryptography:** Employs industry-standard **PBKDF2-SHA256 salt-based hashing** to secure passwords.
 3. **Session Management:** Restricts access to dashboard pages. Users must be actively logged in with a valid session cookie to view protected routes.
 4. **Time-Limited OTPs:** Generated recovery OTPs expire after 5 minutes and are verified securely from server-side memory to mitigate brute-force attempts.
+
+---
+
+## 🔮 Future Roadmap (AI Integration)
+
+To further elevate the project's security and capabilities, the following advanced AI-powered modules are planned for integration:
+
+### 1. AI-Powered Face Recognition Login (Passwordless Auth)
+* **Concept:** Implement webcam-based facial recognition for a secure, passwordless authentication experience.
+* **Mechanism:** Utilize Python's `face_recognition` and `OpenCV` libraries on the backend to extract 128-dimensional facial embeddings, comparing them in real-time against stored templates.
+* **Liveness Detection:** Integrate blink and motion detection on the client-side to prevent spoofing attacks (e.g. holding a photo up to the camera).
+
+### 2. Smart Anomaly & Risk Detection Engine
+* **Concept:** A smart engine to dynamically evaluate the security risk score of every login attempt and prevent unauthorized access.
+* **Mechanism:** Maintain a `login_history` dataset to monitor parameters such as user IP, geolocation, device signatures, and login timestamps.
+* **Contextual 2FA:** If a login attempt deviates significantly from the user's historical baseline (e.g. logging in from a new device or country at 3 AM), the system automatically triggers the SMTP-based OTP email verification flow to confirm identity.
+
