@@ -37,6 +37,8 @@ def get_connection():
     )
 
 
+
+
 # Create users table on startup
 conn = get_connection()
 cursor = conn.cursor()
@@ -44,7 +46,6 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    aadhar VARCHAR(12) NOT NULL,
     phone VARCHAR(10) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -61,15 +62,12 @@ reset_tokens = {}
 login_attempts = {}
 emojis = ["😀", "🎉", "🚀", "🔥", "🌟", "💎", "✨"]
 
-def validate_password(password, last_name, aadhar, phone):
+def validate_password(password, last_name, phone):
     last3 = last_name[-3:].lower()
     caps = [c.upper() for c in last3]
 
     if not any(c in password for c in caps):
         return False, f"Password must include uppercase from: {', '.join(caps)}"
-
-    if aadhar[-2:] not in password:
-        return False, "Password must contain last 2 digits of Aadhar."
 
     if phone[-2:] not in password:
         return False, "Password must contain last 2 digits of phone."
@@ -77,11 +75,11 @@ def validate_password(password, last_name, aadhar, phone):
     return True, "OK"
 
 
-def auto_generate_password(last_name, aadhar, phone):
+def auto_generate_password(last_name, phone):
     caps = [c.upper() for c in last_name[-3:].lower()]
     cap = random.choice(caps)
 
-    base = cap + aadhar[-2:] + phone[-2:]
+    base = cap + phone[-2:]
     random_part = ''.join(random.choices(string.ascii_letters + string.digits, k=4))
 
     pwd = list(base + random_part)
@@ -122,7 +120,6 @@ def home():
 @app.route('/signup', methods=['POST'])
 def signup():
     name = request.form.get('name', '').strip()
-    aadhar = request.form.get('aadhar', '').strip()
     phone = request.form.get('phone', '').strip()
     email = request.form.get('email', '').lower()
 
@@ -133,11 +130,11 @@ def signup():
     last_name = name.split()[-1]
 
     if 'auto_password' in request.form:
-        password = auto_generate_password(last_name, aadhar, phone)
+        password = auto_generate_password(last_name, phone)
         generated = True
     else:
         password = request.form.get('password', '')
-        valid, msg = validate_password(password, last_name, aadhar, phone)
+        valid, msg = validate_password(password, last_name, phone)
         if not valid:
             flash(msg)
             return redirect('/')
@@ -149,8 +146,8 @@ def signup():
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO users (name, aadhar, phone, email, password, emoji) VALUES (%s, %s, %s, %s, %s, %s)",
-        (name, aadhar, phone, email, hashed, emoji)
+        "INSERT INTO users (name, phone, email, password, emoji) VALUES (%s, %s, %s, %s, %s)",
+        (name, phone, email, hashed, emoji)
     )
     conn.commit()
     cursor.close()
@@ -288,16 +285,15 @@ def reset_password_page(token):
     user = cursor.fetchone()
 
     name = user['name']
-    aadhar = user['aadhar']
     phone = user['phone']
     last_name = name.split()[-1]
 
     if 'auto_password' in request.form:
-        new_pass = auto_generate_password(last_name, aadhar, phone)
+        new_pass = auto_generate_password(last_name, phone)
         gen = True
     else:
         new_pass = request.form.get('password')
-        valid, msg = validate_password(new_pass, last_name, aadhar, phone)
+        valid, msg = validate_password(new_pass, last_name, phone)
         if not valid:
             flash(msg)
             return redirect(url_for('reset_password_page', token=token))
