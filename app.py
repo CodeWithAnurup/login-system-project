@@ -75,16 +75,28 @@ def validate_password(password, last_name, phone):
     return True, "OK"
 
 
-def auto_generate_password(last_name, phone):
-    caps = [c.upper() for c in last_name[-3:].lower()]
-    cap = random.choice(caps)
+def auto_generate_password(last_name=None, phone=None):
+    # Google-style password: xxxx-xxxx-xxxx (12 characters with hyphens)
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    digits = string.digits
+    all_chars = lower + upper + digits
+    
+    # Ensure at least one lowercase, one uppercase, and one digit
+    pwd_chars = [
+        random.choice(lower),
+        random.choice(upper),
+        random.choice(digits)
+    ] + random.choices(all_chars, k=9)
+    
+    random.shuffle(pwd_chars)
+    
+    # Format as xxxx-xxxx-xxxx
+    part1 = "".join(pwd_chars[:4])
+    part2 = "".join(pwd_chars[4:8])
+    part3 = "".join(pwd_chars[8:])
+    return f"{part1}-{part2}-{part3}"
 
-    base = cap + phone[-2:]
-    random_part = ''.join(random.choices(string.ascii_letters + string.digits, k=4))
-
-    pwd = list(base + random_part)
-    random.shuffle(pwd)
-    return ''.join(pwd)
 
 
 def get_user_by_email(email):
